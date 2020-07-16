@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
+@include('layouts.nav')
+
 <div class="container">
-
     @section('content')
-
         @include('layouts.navigation')
 
         <form action="/phonebook/create" enctype="multipart/form-data" method="post">

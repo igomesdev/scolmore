@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
+@include('layouts.nav')
+
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    @include('layouts.navigation')
+    <div class="container">
+        <h1>Phone List</h1>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <table id="customers">
+            <th>Phone Number</th>
+            <th>Message</th>
+            <th>Message Sent</th>
+            <th>Updated At</th>
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+            @foreach($phonebook as $phone)
+                <tr>
+                    <td> {{ $phone->phonenumber }}</td>
+                    <td> {{ $phone->message}}</td>
+                    <td> {{ $phone->created_at }}</td>
+                    <td> {{ $phone->updated_at}}</td>
+                </tr>
+            @endforeach
+        </table>
     </div>
 </div>
 @endsection

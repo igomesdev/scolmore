@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Phonebook;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $phonebook = Phonebook::all();
+
+        return view('home', [
+            'phonebook' => $phonebook
+        ]);
     }
 }
