@@ -24,7 +24,11 @@ class PhonebookController extends Controller
      */
     public function create()
     {
-        //
+        $phonebook = phonebook::all();
+
+        return view('phonebook.create', [
+            'phonebook' => $phonebook
+        ]);
     }
 
     /**
