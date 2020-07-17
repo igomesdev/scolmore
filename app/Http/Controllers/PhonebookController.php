@@ -33,9 +33,19 @@ class PhonebookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $data = request()->validate([
+            'phonenumber' => '',
+            'message' => ''
+        ]);
+
+        $phonebook = new Phonebook();
+        $phonebook->phonenumber = $data['phonenumber'];
+        $phonebook->message = $data['message'];
+        $phonebook->save();
+
+        return redirect('/home');
     }
 
     /**
