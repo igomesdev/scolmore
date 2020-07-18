@@ -37,7 +37,7 @@ class PhonebookController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'phonenumber' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'phonenumber' => 'required|numeric',
             'message' => ['required','string','max:140']
         ]);
 
@@ -49,7 +49,7 @@ class PhonebookController extends Controller
 
         $this->sendMessage($phonebook->message, request()->phonenumber);
 
-        return redirect('/home');
+        return redirect('/phonebook/create')->with(['success'=>"The message from {$phonebook->name} has been sent successfuly"]);
     }
 
     /**
@@ -66,16 +66,19 @@ class PhonebookController extends Controller
         $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
     }
 
-
     /**
      * Display the specified resource.
      *
      * @param  \App\phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function show(Phonebook $phonebook)
+    public function show()
     {
-        //
+        $phonebook = Phonebook::all();
+
+        return view('phonebook/show', [
+            'phonebook' => $phonebook
+        ]);
     }
 
     /**

@@ -1,14 +1,28 @@
-<?php
-
 @extends('layouts.app')
 
 @include('layouts.nav')
 
 <div class="container">
+    <div class="">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     @section('content')
         @include('layouts.navigation')
 
-        <form action="/home" enctype="multipart/form-data" method="post">
+        <form action="/phonebook/create" enctype="multipart/form-data" method="post">
             @csrf
             <div class="row">
                 <div class="col-8 offset-2">

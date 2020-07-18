@@ -1,7 +1,7 @@
 <div class="container">
     <ul class="d-flex navInfo">
         <li>
-            <a href="/home" class="navLink">Message List</a>
+            <a href="/phonebook/show" class="navLink">Message List</a>
         </li>
 
         <li>

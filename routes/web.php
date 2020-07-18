@@ -23,4 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/phonebook/create', 'PhonebookController@create');
 
-Route::post('/home', 'PhonebookController@store');
+Route::get('/phonebook/show', 'PhonebookController@show');
+
+Route::post('/phonebook/create', 'PhonebookController@store');

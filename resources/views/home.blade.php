@@ -2,29 +2,74 @@
 
 @include('layouts.nav')
 
-@section('content')
 <div class="container">
-    @include('layouts.navigation')
-    <div class="container">
-        <h1>Phone List</h1>
-
-        <table id="customers">
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Message</th>
-            <th>Message Sent</th>
-            <th>Updated At</th>
-
-            @foreach($phonebook as $phone)
-                <tr>
-                    <td> {{ $phone->name }}</td>
-                    <td> {{ $phone->phonenumber }}</td>
-                    <td> {{ $phone->message}}</td>
-                    <td> {{ $phone->created_at }}</td>
-                    <td> {{ $phone->updated_at}}</td>
-                </tr>
-            @endforeach
-        </table>
+    <div class="">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
+    @section('content')
+        @include('layouts.navigation')
+
+        <form action="/phonebook/create" enctype="multipart/form-data" method="post">
+            @csrf
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <div class="row">
+                        <h1>Send Message</h1>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phonenumber" class="col-form-label">Phone Number</label>
+                        <input id="phonenumber"
+                               type="tel"
+                               class="form-control @error('message') is-invalid @enderror"
+                               name="phonenumber"
+                               autocomplete="phonenumber" autofocus>
+                        @error('phonenumber')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="message" class="col-md-4 col-form-label">Message</label>
+                        <textarea id="message"
+                                  maxlength="140"
+                                  type="text"
+                                  class="form-control @error('message') is-invalid @enderror"
+                                  name="message"
+                                  autocomplete="message"
+                                  autofocus>
+                        </textarea>
+                        <p>
+                            <span id="wordCount">140</span> Characters
+                        </p>
+
+                        @error('message')
+                        <span class="invalid-feedback" role="alert">
+                                     <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
+                    </div>
+
+                    <div class="row pt-4">
+                        <button class="btn btn-primary">Send Message</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endsection
 </div>
-@endsection
