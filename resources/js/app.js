@@ -30,3 +30,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+$('#message').on('keyup',function(){
+    var count = $('#message').val().trim().split('');
+    $('#wordCount').text(140 - count.length);
+});

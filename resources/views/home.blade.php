@@ -9,6 +9,7 @@
         <h1>Phone List</h1>
 
         <table id="customers">
+            <th>Name</th>
             <th>Phone Number</th>
             <th>Message</th>
             <th>Message Sent</th>
@@ -16,6 +17,7 @@
 
             @foreach($phonebook as $phone)
                 <tr>
+                    <td> {{ $phone->name }}</td>
                     <td> {{ $phone->phonenumber }}</td>
                     <td> {{ $phone->message}}</td>
                     <td> {{ $phone->created_at }}</td>

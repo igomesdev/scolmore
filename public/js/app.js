@@ -49753,6 +49753,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+$('#message').on('keyup', function () {
+  var count = $('#message').val().trim().split('');
+  $('#wordCount').text(140 - count.length);
+});
 
 /***/ }),
 

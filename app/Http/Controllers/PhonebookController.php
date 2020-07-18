@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Phonebook;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 
 class PhonebookController extends Controller
 {
@@ -36,17 +37,35 @@ class PhonebookController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'phonenumber' => '',
-            'message' => ''
+            'phonenumber' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'message' => ['required','string','max:140']
         ]);
 
         $phonebook = new Phonebook();
+        $phonebook->name = auth()->user()->name;
         $phonebook->phonenumber = $data['phonenumber'];
         $phonebook->message = $data['message'];
         $phonebook->save();
 
+        $this->sendMessage($phonebook->message, request()->phonenumber);
+
         return redirect('/home');
     }
+
+    /**
+     * Sends sms to user using Twilio's programmable sms client
+     * @param String $message Body of sms
+     * @param Number $recipients Number of recipient
+     */
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = "AC9773e294923d8caacf8008bef6e7ba0d";
+        $auth_token = "b48e12ca18cf364240d43ec6c04a7cda";
+        $twilio_number = "+12514511145";
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
+    }
+
 
     /**
      * Display the specified resource.

@@ -1,62 +1,4 @@
 <?php
-/*
-// Update the path below to your autoload.php,
-// see https://getcomposer.org/doc/01-basic-usage.md
-
-require_once '../vendor/twilio/sdk/src/Twilio/autoload.php';
-
-use Twilio\Rest\Client;
-
-$sid    = "AC9773e294923d8caacf8008bef6e7ba0d";
-$token  = "2d20c60fa96b15bb10cfebcad8b6f33f";
-$twilio = new Client($sid, $token);
-
-$message = $twilio->messages
-    ->create("+447384577069", // to
-        array(
-            "from" => "+12514511145",
-            "body" => "Your message"
-        )
-    );
-
-print($message->sid);
-*/
-?>
-
-<?php
-/*
-// Update the path below to your autoload.php,
-// see https://getcomposer.org/doc/01-basic-usage.md
-
-require_once '../vendor/twilio/sdk/src/Twilio/autoload.php';
-
-use Twilio\Rest\Client;
-
-if(isset($_POST['phonenumber']) && ($_POST['message']))  {
-
-    $sid    = "AC9773e294923d8caacf8008bef6e7ba0d";
-    $token  = "2d20c60fa96b15bb10cfebcad8b6f33f";
-    $twilio = new Client($sid, $token);
-
-    $message = $twilio->messages
-        ->create(
-            $_POST["phonenumber"], array(
-                "from" => "+12514511145",
-                "body" => $_POST["message"]
-            )
-        );
-
-    print($message->sid);
-
-}
-*/
-?>
-
-
-
-
-
-
 
 @extends('layouts.app')
 
@@ -77,8 +19,8 @@ if(isset($_POST['phonenumber']) && ($_POST['message']))  {
                     <div class="form-group row">
                         <label for="phonenumber" class="col-form-label">Phone Number</label>
                         <input id="phonenumber"
-                               type="text"
-                               class="form-control"
+                               type="tel"
+                               class="form-control @error('message') is-invalid @enderror"
                                name="phonenumber"
                                autocomplete="phonenumber" autofocus>
                         @error('phonenumber')
@@ -90,9 +32,8 @@ if(isset($_POST['phonenumber']) && ($_POST['message']))  {
 
                     <div class="form-group row">
                         <label for="message" class="col-md-4 col-form-label">Message</label>
-
                         <textarea id="message"
-                                  maxlength="2000"
+                                  maxlength="140"
                                   type="text"
                                   class="form-control @error('message') is-invalid @enderror"
                                   name="message"
@@ -100,7 +41,7 @@ if(isset($_POST['phonenumber']) && ($_POST['message']))  {
                                   autofocus>
                         </textarea>
                         <p>
-                            <span id="wordCount">2000</span> Characters
+                            <span id="wordCount">140</span> Characters
                         </p>
 
                         @error('message')
