@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Scolmore Technical Test</title>
+    <title>Twilio message from My PC</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -17,7 +17,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            Scolmore Technical Test
+            Twilio message from My PC
         </div>
 
         <div class="links">

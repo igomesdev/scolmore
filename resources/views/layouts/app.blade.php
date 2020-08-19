@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Scolmore Technical Test</title>
+    <title>Twilio message from My PC</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
